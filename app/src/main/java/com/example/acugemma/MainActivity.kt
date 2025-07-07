@@ -8,9 +8,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.acugemma.ui.screens.Home
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.acugemma.navigation.Screen
+import com.example.acugemma.ui.screens.HomeScreen
+import com.example.acugemma.ui.screens.SubjectDetailScreen
 import com.example.acugemma.ui.theme.AcuGemmaTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,9 +27,39 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Home()
+                    AcuGemma()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun AcuGemma() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
+        composable(Screen.Home.route) {
+            HomeScreen(
+                onSubjectClick = { subject ->
+                    navController.navigate(Screen.SubjectDetail.createRoute(subject.name))
+                }
+            )
+        }
+
+        composable(Screen.SubjectDetail.route) { backStackEntry ->
+            val subjectName = backStackEntry.arguments?.getString("subjectName") ?: ""
+            SubjectDetailScreen(
+                subjectName = subjectName,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onTopicClick = {topic ->
+                    // TODO: Navigate to topic detail or lesson
+                    // navController.navigate(Screen.TopicDetail.createRoute(topic.id))
+                }
+            )
+
         }
     }
 }
@@ -34,6 +68,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HomePreview() {
     AcuGemmaTheme {
-        Home()
+        AcuGemma()
     }
 }

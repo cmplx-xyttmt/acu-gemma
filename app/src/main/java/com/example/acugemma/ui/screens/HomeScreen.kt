@@ -47,15 +47,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.acugemma.ui.components.BottomNavigationBar
-import com.example.acugemma.R
+import com.example.acugemma.data.LearningRepository
+import com.example.acugemma.data.Subject
 import com.example.acugemma.ui.theme.WHITE_BACKGROUND_COLOR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home() {
+fun HomeScreen(
+    onSubjectClick: (Subject) -> Unit
+) {
     var selectedTab by remember {
         mutableIntStateOf(0)
     }
+    val subjects = LearningRepository.getSubjects()
 
     Scaffold(
         topBar = {
@@ -100,7 +104,10 @@ fun Home() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                SubjectsSection()
+                SubjectsSection(
+                    subjects = subjects,
+                    onSubjectClick = onSubjectClick
+                )
             }
             item {
                 ContinueLearningSection()
@@ -112,7 +119,10 @@ fun Home() {
 
 
 @Composable
-fun SubjectsSection() {
+fun SubjectsSection(
+    subjects: List<Subject>,
+    onSubjectClick: (Subject) -> Unit
+) {
     Column {
         Text(
             text = "Subjects",
@@ -122,17 +132,16 @@ fun SubjectsSection() {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        SubjectCard(
-            title = "Mathematics",
-            description = "Explore numbers, shapes, and problem-solving.",
-            drawableResId = R.drawable.math_image
-        )
+        subjects.forEach { subject ->
+            SubjectCard(
+                title = subject.name,
+                description = subject.description,
+                drawableResId = subject.imageDrawableInt,
+                onStartClick = { onSubjectClick(subject) }
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        SubjectCard(title = "Geography",
-            description = "Discover the world, its landscpaes, and cultures.",
-            drawableResId = R.drawable.geography_image)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 }
 
@@ -140,7 +149,8 @@ fun SubjectsSection() {
 fun SubjectCard(
     title: String,
     description: String,
-    drawableResId: Int
+    drawableResId: Int,
+    onStartClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -189,7 +199,7 @@ fun SubjectCard(
                 }
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = onStartClick,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFFf4b43d),
                         contentColor = Color(0xFF181611)
