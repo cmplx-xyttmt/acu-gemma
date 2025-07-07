@@ -46,9 +46,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.acugemma.BottomNavigationBar
+import com.example.acugemma.ui.components.BottomNavigationBar
 import com.example.acugemma.R
-import com.example.acugemma.WHITE_BACKGROUND_COLOR
+import com.example.acugemma.ui.theme.WHITE_BACKGROUND_COLOR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
