@@ -8,7 +8,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -46,11 +48,11 @@ fun BottomNavigationBar(
             val navItems = listOf(
                 BottomNavItem("Learn", Icons.Default.Home, true),
                 BottomNavItem(
-                    "Practice",
-                    Icons.Default.Build,
+                    "Subjects",
+                    Icons.Default.MenuBook,
                     false
                 ), // TODO: Add more appropriate Icon,
-                BottomNavItem("Progress", Icons.Default.Check, false),
+                BottomNavItem("Progress", Icons.Default.ShowChart, false),
                 BottomNavItem("Profile", Icons.Default.Person, false)
             )
 

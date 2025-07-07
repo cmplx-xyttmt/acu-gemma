@@ -1,0 +1,9 @@
+package com.example.acugemma.navigation
+
+sealed class Screen(val route: String) {
+    object Home: Screen("home")
+    object SubjectDetail: Screen("subject_detail/{subjectName}") {
+        fun createRoute(subjectName: String) = "subject_detail/$subjectName"
+    }
+    object TopicDetail: Screen("topic_detail/{topicName}")
+}
