@@ -116,7 +116,7 @@ fun SubjectDetailScreen(
 
             subject.topics.forEach {topic ->
                 item {
-                    TopicCard(topic = topic, onClick = { /*TODO*/ })
+                    TopicCard(topic = topic, onClick = { onTopicClick(topic) })
                 }
             }
         }

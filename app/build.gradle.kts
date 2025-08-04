@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.acugemma"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -47,6 +47,9 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    aaptOptions {
+        noCompress += ".tflite"
     }
 }
 
@@ -60,9 +63,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material-icons-extended:<compose_version>")
-    val nav_version = "2.9.1"
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
+    val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("com.google.mediapipe:tasks-genai:0.10.25")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

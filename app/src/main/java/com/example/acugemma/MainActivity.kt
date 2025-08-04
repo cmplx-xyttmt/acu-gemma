@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.acugemma.navigation.Screen
 import com.example.acugemma.ui.screens.HomeScreen
+import com.example.acugemma.ui.screens.LessonScreen
 import com.example.acugemma.ui.screens.SubjectDetailScreen
 import com.example.acugemma.ui.theme.AcuGemmaTheme
 
@@ -55,11 +56,15 @@ fun AcuGemma() {
                     navController.popBackStack()
                 },
                 onTopicClick = {topic ->
-                    // TODO: Navigate to topic detail or lesson
-                    // navController.navigate(Screen.TopicDetail.createRoute(topic.id))
+                    navController.navigate(Screen.Lesson.createRoute(topic.id))
                 }
             )
 
+        }
+
+        composable(Screen.Lesson.route) { backStackEntry ->
+            val topicId = backStackEntry.arguments?.getString("topicId") ?: ""
+            LessonScreen(topicId = topicId)
         }
     }
 }
