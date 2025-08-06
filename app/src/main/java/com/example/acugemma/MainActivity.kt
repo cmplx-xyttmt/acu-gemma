@@ -64,7 +64,12 @@ fun AcuGemma() {
 
         composable(Screen.Lesson.route) { backStackEntry ->
             val topicId = backStackEntry.arguments?.getString("topicId") ?: ""
-            LessonScreen(topicId = topicId)
+            LessonScreen(
+                topicId = topicId,
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

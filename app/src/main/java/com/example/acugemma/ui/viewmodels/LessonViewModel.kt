@@ -27,26 +27,30 @@ class LessonViewModel(private val gemmaAiService: GemmaAiService, private val to
     private fun startLesson() {
         val prompt = LessonPrompts.getPrompt(topicId)
         val progressListener = { partialResult: String, done: Boolean ->
-            val currentMessages = (uiState.value as? LessonUiState.Success)?.messages ?: emptyList()
-            val newMessages = if (currentMessages.isEmpty()) {
-                listOf(partialResult)
+            val currentMessages = (_uiState.value as? LessonUiState.Success)?.messages?.toMutableList() ?: mutableListOf()
+            if (currentMessages.isEmpty() || currentMessages.last().sender == Sender.User) {
+                currentMessages.add(Message(partialResult, Sender.Model))
             } else {
-                currentMessages.toMutableList().apply { set(lastIndex, get(lastIndex) + partialResult) }
+                currentMessages[currentMessages.lastIndex] = currentMessages.last().copy(text = currentMessages.last().text + partialResult)
             }
-            _uiState.value = LessonUiState.Success(newMessages)
+            _uiState.value = LessonUiState.Success(currentMessages)
         }
         gemmaAiService.generateResponseAsync(prompt, progressListener)
     }
 
     fun sendMessage(message: String) {
-        val currentMessages = (uiState.value as? LessonUiState.Success)?.messages ?: emptyList()
+        val currentMessages = (_uiState.value as? LessonUiState.Success)?.messages?.toMutableList() ?: mutableListOf()
+        currentMessages.add(Message(message, Sender.User))
+        _uiState.value = LessonUiState.Success(currentMessages)
+
         val progressListener = { partialResult: String, done: Boolean ->
-            val newMessages = if (currentMessages.isEmpty()) {
-                listOf(partialResult)
+            val updatedMessages = (_uiState.value as? LessonUiState.Success)?.messages?.toMutableList() ?: mutableListOf()
+            if (updatedMessages.isEmpty() || updatedMessages.last().sender == Sender.User) {
+                updatedMessages.add(Message(partialResult, Sender.Model))
             } else {
-                currentMessages.toMutableList().apply { set(lastIndex, get(lastIndex) + partialResult) }
+                updatedMessages[updatedMessages.lastIndex] = updatedMessages.last().copy(text = updatedMessages.last().text + partialResult)
             }
-            _uiState.value = LessonUiState.Success(newMessages)
+            _uiState.value = LessonUiState.Success(updatedMessages)
         }
         gemmaAiService.generateResponseAsync(message, progressListener)
     }
@@ -59,6 +63,12 @@ class LessonViewModel(private val gemmaAiService: GemmaAiService, private val to
 
 sealed interface LessonUiState {
     object Loading : LessonUiState
-    data class Success(val messages: List<String>) : LessonUiState
+    data class Success(val messages: List<Message>) : LessonUiState
     data class Error(val message: String) : LessonUiState
+}
+
+data class Message(val text: String, val sender: Sender)
+
+enum class Sender {
+    User, Model
 }
