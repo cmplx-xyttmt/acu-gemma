@@ -3,12 +3,11 @@ package com.example.acugemma.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -47,6 +46,7 @@ import com.example.acugemma.ui.viewmodels.LessonUiState
 import com.example.acugemma.ui.viewmodels.Message
 import com.example.acugemma.ui.viewmodels.Sender
 import com.example.acugemma.ui.viewmodels.ViewModelFactory
+import com.example.acugemma.ui.utils.MarkdownText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -191,8 +191,8 @@ fun MessageBubble(message: Message) {
                 )
                 .padding(12.dp)
         ) {
-            Text(
-                text = message.text,
+            MarkdownText(
+                markdown = message.text,
                 color = Color(0xFF181511)
             )
         }
