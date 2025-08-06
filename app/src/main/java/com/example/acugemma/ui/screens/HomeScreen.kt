@@ -46,7 +46,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.acugemma.ui.components.BottomNavigationBar
+
 import com.example.acugemma.data.LearningRepository
 import com.example.acugemma.data.Subject
 import com.example.acugemma.ui.theme.WHITE_BACKGROUND_COLOR
@@ -88,12 +88,7 @@ fun HomeScreen(
                 )
             )
         },
-        bottomBar = {
-            BottomNavigationBar(
-                selectedTab = selectedTab,
-                onTabSelected = { selectedTab = it }
-            )
-        },
+        
         containerColor = Color.White
     ) { paddingValues ->
         LazyColumn(

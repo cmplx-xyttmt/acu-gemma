@@ -28,10 +28,8 @@ To develop an interactive Android application that leverages a local Gemma AI mo
 ### Phase 2: Navigation & Core Functionality (Estimated: 3-5 hours)
 
 *   **Task 2.1: Implement Bottom Navigation Functionality (3-5 hours)**
-    *   **Description:** Connect the `BottomNavigationBar` in `MainActivity.kt` to the `NavController` to enable proper navigation between different sections (Home, Progress, etc.) when a tab is clicked. This will involve defining the navigation routes for each tab and handling the `onTabSelected` callback.
-    *   **Files to Modify:** `app/src/main/java/com/example/acugemma/MainActivity.kt`, `app/src/main/java/com/example/acugemma/navigation/Screen.kt` (if new routes are needed).
-    *   **New Files:** Potentially new screen composables for other tabs (e.g., `ProgressScreen.kt`).
-
+    *   **Description:** enable proper navigation between different sections (Home, Progress, Subjects, Profile etc.) when a tab is clicked. This will involve defining the navigation routes for each tab and handling the `onTabSelected` callback.
+   
 ### Phase 3: Model Behavior & Guardrails (Estimated: 10-15 hours)
 
 *   **Task 3.1: Refine Initial Prompt for User-Driven Interaction (3-4 hours)**

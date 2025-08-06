@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.acugemma.data.LearningRepository
 import com.example.acugemma.data.Topic
-import com.example.acugemma.ui.components.BottomNavigationBar
+
 import com.example.acugemma.ui.theme.AcuGemmaTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -93,9 +93,7 @@ fun SubjectDetailScreen(
                 )
             )
         },
-        bottomBar = {
-            BottomNavigationBar(selectedTab = selectedTab, onTabSelected = { selectedTab = it })
-        },
+        
         containerColor = Color.White
     ) { paddingValues ->
         LazyColumn(

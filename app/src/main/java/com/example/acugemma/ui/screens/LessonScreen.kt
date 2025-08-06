@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.acugemma.ai.GemmaAiService
-import com.example.acugemma.ui.components.BottomNavigationBar
+
 import com.example.acugemma.ui.viewmodels.LessonViewModel
 import com.example.acugemma.ui.viewmodels.LessonUiState
 import com.example.acugemma.ui.viewmodels.Message
@@ -88,9 +88,7 @@ fun LessonScreen(
                 )
             )
         },
-        bottomBar = {
-            BottomNavigationBar(selectedTab = selectedTab, onTabSelected = { selectedTab = it })
-        },
+        
         containerColor = Color.White
     ) { paddingValues ->
         Column(modifier = Modifier
