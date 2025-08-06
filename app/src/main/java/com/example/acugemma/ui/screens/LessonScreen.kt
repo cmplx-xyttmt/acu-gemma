@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -25,6 +27,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -97,15 +100,23 @@ fun LessonScreen(
             when (val state = uiState) {
                 
                 is LessonUiState.Processing -> {
+                    val listState = rememberLazyListState()
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
                             .imePadding(),
-
+                        state = listState,
                         verticalArrangement = Arrangement.Bottom
                     ) {
-                        items(state.messages) { message ->
+                        val messages = state.messages
+                        items(messages) { message ->
                             MessageBubble(message = message)
+                        }
+                    }
+                    // Scroll to the last item when new messages arrive
+                    if (state.messages.isNotEmpty()) {
+                        LaunchedEffect(state.messages.size) {
+                            listState.animateScrollToItem(state.messages.lastIndex)
                         }
                     }
                     Row(
@@ -127,15 +138,23 @@ fun LessonScreen(
                     }
                 }
                 is LessonUiState.Success -> {
+                    val listState = rememberLazyListState()
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
                             .imePadding(),
-
+                        state = listState,
                         verticalArrangement = Arrangement.Bottom
                     ) {
-                        items(state.messages) { message ->
+                        val messages = state.messages
+                        items(messages) { message ->
                             MessageBubble(message = message)
+                        }
+                    }
+                    // Scroll to the last item when new messages arrive
+                    if (state.messages.isNotEmpty()) {
+                        LaunchedEffect(state.messages.size) {
+                            listState.animateScrollToItem(state.messages.lastIndex)
                         }
                     }
                     Row(
@@ -161,7 +180,14 @@ fun LessonScreen(
                     }
                 }
                 is LessonUiState.Error -> {
-                    Text(text = state.message)
+                    Text(
+                        text = state.message,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        textAlign = TextAlign.Center,
+                        color = Color.Red
+                    )
                 }
             }
         }
