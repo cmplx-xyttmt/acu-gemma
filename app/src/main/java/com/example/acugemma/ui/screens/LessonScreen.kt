@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Send
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -96,15 +97,43 @@ fun LessonScreen(
             .fillMaxSize()
             .padding(paddingValues)) {
             when (val state = uiState) {
-                is LessonUiState.Loading -> {
-                    Text(text = "Loading...")
+                
+                is LessonUiState.Processing -> {
+                    LazyColumn(
+                        modifier = Modifier
+                            .weight(1f)
+                            .imePadding(),
+
+                        verticalArrangement = Arrangement.Bottom
+                    ) {
+                        items(state.messages) { message ->
+                            MessageBubble(message = message)
+                        }
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        TextField(
+                            value = userMessage,
+                            onValueChange = { userMessage = it },
+                            modifier = Modifier.weight(1f),
+                            placeholder = { Text("Type your message...") },
+                            enabled = false
+                        )
+                        IconButton(onClick = {}, enabled = false) {
+                            CircularProgressIndicator()
+                        }
+                    }
                 }
                 is LessonUiState.Success -> {
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
                             .imePadding(),
-                        reverseLayout = true,
+
                         verticalArrangement = Arrangement.Bottom
                     ) {
                         items(state.messages) { message ->

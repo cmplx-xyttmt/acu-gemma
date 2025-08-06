@@ -23,6 +23,7 @@ To develop an interactive Android application that leverages a local Gemma AI mo
 *   **Task 1.3: Implement Loading Spinner for Model Processing (2-3 hours)**
     *   **Description:** Introduce a visual loading indicator (e.g., a progress bar or spinner) that appears when the model is generating a response and disappears once the response is complete.
     *   **Files to Modify:** `app/src/main/java/com/example/acugemma/ui/screens/LessonScreen.kt`, `app/src/main/java/com/example/acugemma/ui/viewmodels/LessonViewModel.kt` (to expose a loading state).
+*  **Task 1.4: Enable chat boxes to render markdown content.
 
 ### Phase 2: Navigation & Core Functionality (Estimated: 3-5 hours)
 
