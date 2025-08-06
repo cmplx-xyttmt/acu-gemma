@@ -179,6 +179,44 @@ fun LessonScreen(
                         }
                     }
                 }
+                is LessonUiState.Validating -> {
+                    val listState = rememberLazyListState()
+                    LazyColumn(
+                        modifier = Modifier
+                            .weight(1f)
+                            .imePadding(),
+                        state = listState,
+                        verticalArrangement = Arrangement.Bottom
+                    ) {
+                        val messages = state.messages
+                        items(messages) { message ->
+                            MessageBubble(message = message)
+                        }
+                    }
+                    // Scroll to the last item when new messages arrive
+                    if (state.messages.isNotEmpty()) {
+                        LaunchedEffect(state.messages.size) {
+                            listState.animateScrollToItem(state.messages.lastIndex)
+                        }
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        TextField(
+                            value = userMessage,
+                            onValueChange = { userMessage = it },
+                            modifier = Modifier.weight(1f),
+                            placeholder = { Text("Validating answer...") },
+                            enabled = false
+                        )
+                        IconButton(onClick = {}, enabled = false) {
+                            CircularProgressIndicator()
+                        }
+                    }
+                }
                 is LessonUiState.Error -> {
                     Text(
                         text = state.message,

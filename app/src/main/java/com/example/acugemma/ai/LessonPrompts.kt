@@ -42,4 +42,10 @@ You are AcuGemma, a friendly and encouraging AI tutor. Your sole purpose is to t
 
     return basePrompt + responsePrompt
     }
+
+    fun buildValidationPrompt(userResponse: String, expectedAnswer: String): String {
+        return """
+Is "$userResponse" correct? Expected: "$expectedAnswer". Respond CORRECT or INCORRECT.
+""".trimIndent()
+    }
 }
