@@ -44,7 +44,12 @@ class GemmaAiService(private val context: Context) {
         llmSession.generateResponseAsync(listener)
     }
 
+    fun cancelGeneration() {
+        llmSession.cancelGenerateResponseAsync()
+    }
+
     fun close() {
+        cancelGeneration()
         llmSession.close()
         llmInference.close()
     }

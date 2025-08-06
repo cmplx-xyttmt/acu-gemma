@@ -58,6 +58,7 @@ class LessonViewModel(private val gemmaAiService: GemmaAiService, private val to
 
     override fun onCleared() {
         super.onCleared()
+        gemmaAiService.cancelGeneration()
         gemmaAiService.close()
     }
 }
