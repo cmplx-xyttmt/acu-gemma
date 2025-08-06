@@ -36,9 +36,8 @@ object LearningRepository {
     )
 
     private fun getMathTopics(): List<Topic> = listOf(
-        Topic("addition", "Addition", "Numbers and Operations", Icons.Default.Add),
-        Topic("subtraction", "Subtraction", "Numbers and Operations", Icons.Default.Remove),
-        Topic("multiplication", "Multiplication", "Numbers and Operations", Icons.Default.Close),
+        Topic("addition and subtraction", "Addition", "Numbers and Operations", Icons.Default.Add),
+        Topic("multiplication and division", "Multiplication", "Numbers and Operations", Icons.Default.Close),
         Topic("shapes", "Shapes", "Geometry", Icons.Default.CropSquare),
         Topic("money", "Money", "Numbers and Operations", Icons.Default.AttachMoney),
         Topic("time", "Time", "Measurement", Icons.Default.Schedule)

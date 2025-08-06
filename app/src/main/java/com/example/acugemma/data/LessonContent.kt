@@ -1,29 +1,27 @@
 package com.example.acugemma.data
 
-object LessonContent {
+import com.example.acugemma.data.math.AdditionLessonContent
+import com.example.acugemma.data.math.MultiplicationDivisionLessonContent
+import com.example.acugemma.data.math.ShapesLessonContent
+import com.example.acugemma.data.math.MoneyLessonContent
+import com.example.acugemma.data.math.TimeLessonContent
+import com.example.acugemma.data.geography.GeographyLessonContent
 
-    val additionLesson = listOf(
-        LessonStep(
-            content = "Addition means combining two numbers to find a total.",
-            question = "If you have 🍎 and get another 🍎, how many apples do you have?",
-            expectedAnswer = "2"
-        ),
-        LessonStep(
-            content = "That's right! You just added. Now, let's try another one.",
-            question = "If you have 3 🎈 and get 2 more, how many balloons do you have?",
-            expectedAnswer = "5"
-        ),
-        LessonStep(
-            content = "Excellent! So, 3 plus 2 equals 5. Addition helps us count things when we put them together.",
-            question = "What is 4 + 1?",
-            expectedAnswer = "5"
-        )
-    )
+object LessonContent {
 
     fun getLessonSteps(topicId: String): List<LessonStep>? {
         return when (topicId) {
-            "addition" -> additionLesson
-            // Add other lessons here as they are defined
+            "addition" -> AdditionLessonContent.additionLesson
+            "multiplication" -> MultiplicationDivisionLessonContent.multiplicationLesson
+            "shapes" -> ShapesLessonContent.shapesLesson
+            "money" -> MoneyLessonContent.moneyLesson
+            "time" -> TimeLessonContent.timeLesson
+            "countries" -> GeographyLessonContent.countriesLesson
+            "continents" -> GeographyLessonContent.continentsLesson
+            "oceans" -> GeographyLessonContent.oceansLesson
+            "weather" -> GeographyLessonContent.weatherLesson
+            "maps" -> GeographyLessonContent.mapsLesson
+            "capitals" -> GeographyLessonContent.capitalsLesson
             else -> null
         }
     }
