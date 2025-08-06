@@ -29,6 +29,7 @@ class GemmaAiService(private val context: Context) {
 
         val inferenceOptions = LlmInference.LlmInferenceOptions.builder()
             .setModelPath(modelFile.absolutePath)
+            .setMaxTokens(4096) // Increased maxTokens to accommodate longer prompts/responses
             .build()
 
         llmInference = LlmInference.createFromOptions(context, inferenceOptions)
