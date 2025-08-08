@@ -4,7 +4,7 @@ AcuGemma is an Android application designed to provide personalized, interactive
 
 ## Video Demo Link
 
-[**Place your video demo link here**]
+[AcuGemma Video](https://youtu.be/wcDmByBljbo?si=UBVroPhoq2APHO4f)
 
 ## Technical Overview
 
